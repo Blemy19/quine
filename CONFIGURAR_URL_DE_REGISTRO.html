@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Conectar invitación de Emily · Google Sheets</title>
+<style>
+:root{--rose:#c29ca6;--dark:#563842;--light:#fff6f9}*{box-sizing:border-box}body{font-family:system-ui,Arial,sans-serif;background:linear-gradient(135deg,#e7d3d9,#fcf6f8);margin:0;min-height:100vh;display:grid;place-items:center;padding:20px;color:var(--dark)}main{width:min(570px,100%);background:#fff;border:1px solid #dcb9c5;border-radius:22px;box-shadow:0 20px 65px #774c6133;padding:28px}h1{font-family:Georgia,serif;font-size:clamp(27px,5vw,40px);font-weight:400;margin:0 0 12px}p{line-height:1.6;color:#78616a}label{display:block;font-weight:650;font-size:14px;margin:18px 0 8px}input{display:block;width:100%;border:1px solid #cda9b4;padding:12px;border-radius:10px;font-size:14px;background:#fff}button{border:0;background:var(--rose);color:white;min-height:46px;padding:12px 18px;border-radius:999px;cursor:pointer;margin-top:23px;font-weight:650;width:100%}button:hover{background:#af7f8d}button:disabled{opacity:.6;cursor:not-allowed}small{display:block;margin-top:15px;color:#806c73}#result{min-height:24px;font-weight:650}a{color:#845264}
+</style>
+</head>
+<body>
+<main>
+<p style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#b08695">Emily · Mis XV Años</p>
+<h1>Activar confirmaciones</h1>
+<p>Después de publicar Google Apps Script, pega aquí su URL. Este archivo te permitirá descargar la invitación conectada, sin instalar Python.</p>
+<label for="file">1. Selecciona el archivo <strong>index.html</strong> de Emily</label>
+<input type="file" id="file" accept=".html,text/html" required>
+<label for="endpoint">2. Pega la URL de la aplicación web de Google</label>
+<input type="url" id="endpoint" placeholder="https://script.google.com/macros/s/.../exec" spellcheck="false" autocomplete="off" required>
+<button id="generate" type="button">Generar invitación conectada</button>
+<p id="result" role="status"></p>
+<small>Esta herramienta funciona en tu computadora; no envía archivos a ningún servicio. La hoja de Google permanece privada. Después, comparte únicamente la invitación HTML descargada, nunca el Excel ni esta configuración.</small>
+<p><a href="ACTIVAR_GOOGLE_SHEETS.md">Ver guía completa de activación</a></p>
+</main>
+<script>
+const file=document.querySelector('#file'),url=document.querySelector('#endpoint'),result=document.querySelector('#result'),button=document.querySelector('#generate');
+button.addEventListener('click',async()=>{
+ const endpoint=url.value.trim();
+ if(!/^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec(?:\?.*)?$/.test(endpoint)){
+   result.textContent='La URL debe ser una aplicación web de Google Apps Script y terminar en /exec.';return;
+ }
+ if(!file.files[0]){result.textContent='Selecciona primero el archivo index.html de Emily.';return;}
+ button.disabled=true;
+ try{
+  const content=await file.files[0].text();
+  const placeholder='PEGAR_URL_GOOGLE_APPS_SCRIPT_AQUI';
+  if(!content.includes(placeholder)){result.textContent='Este HTML ya está conectado o no es la versión preparada para el registro.';return;}
+  const linked=content.replaceAll(placeholder,endpoint);
+  const blob=new Blob([linked],{type:'text/html;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='EMILY_INVITACION_CON_REGISTRO.html';document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href),5000);
+  result.textContent='Invitación configurada y descargada. Haz una prueba de confirmación antes de compartirla.';
+ }catch(e){result.textContent='No se pudo leer el HTML. Comprueba que seleccionaste el archivo correcto.';}
+ finally{button.disabled=false;}
+});
+</script>
+</body>
+</html>

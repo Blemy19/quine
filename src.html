@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#C29CA6">
+  <meta name="description" content="Los XV años de Emily · 12 de diciembre, 7:30 p. m. · Hacienda Meléndez. Te espero para celebrar juntos.">
+  <title>Emily · Mis XV años</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="movie-clouds.css">
+</head>
+<body>
+  <div id="intro" class="intro" role="dialog" aria-modal="true" aria-label="Bienvenida a los XV años de Emily">
+    <div class="intro-glow" aria-hidden="true"></div>
+    <div class="corner-art intro-flower tl" aria-hidden="true"></div><div class="corner-art intro-flower br" aria-hidden="true"></div>
+    <img class="butterfly butterfly-intro one" src="assets/butterfly.svg" alt="" aria-hidden="true"><img class="butterfly butterfly-intro two" src="assets/butterfly.svg" alt="" aria-hidden="true">
+    <div class="intro-content">
+      <p class="small-caps intro-overline">UNA INVITACIÓN ESPECIAL</p>
+      <h1 class="script intro-name">Emily</h1>
+      <p class="intro-subtitle">MIS QUINCE AÑOS</p>
+      <div class="tiny-ornament" aria-hidden="true">✦</div>
+      <button type="button" id="open-envelope" class="envelope-button" aria-label="Abrir el sobre de invitación">
+        <div class="envelope-art" aria-hidden="true">
+          <div class="envelope-shadow"></div>
+          <div class="envelope-paper"><span class="paper-script script">Emily</span><span class="paper-small">12 · DICIEMBRE</span></div>
+          <div class="envelope-body"></div>
+          <div class="envelope-inner-flap"></div>
+          <div class="envelope-leftfold"></div>
+          <div class="envelope-rightfold"></div>
+          <div class="envelope-bottomfold"></div>
+          <div class="envelope-topflap"></div>
+          <span class="envelope-wax">XV</span>
+          <span class="envelope-sprig">❧</span>
+        </div>
+      </button>
+      <p class="intro-instruction">Presiona el sobre para abrir</p>
+      <span class="intro-bottom small-caps">12 DICIEMBRE · 7:30 P. M.</span>
+    </div>
+    <button type="button" id="skip-intro" class="intro-skip" aria-label="Entrar directamente a la invitación">Entrar directamente <span aria-hidden="true">↗</span></button>
+  </div>
+
+  <!-- Video de bienvenida: se muestra después de la apertura del sobre. -->
+  <div id="movie-screen" class="movie-screen" role="dialog" aria-modal="true" aria-label="Video de presentación de los quince años de Emily" hidden>
+    <div class="movie-backdrop" aria-hidden="true"></div>
+    <video id="intro-video" class="intro-video" preload="auto" playsinline poster="assets/video/portada_emily.jpg" src="assets/video/emily_estrellas.mp4" aria-label="Estrella rosada trazando el nombre Emily en un cielo de estrellas"></video>
+    <div class="movie-soft-frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <p class="movie-label" aria-hidden="true">EMILY <span>✦</span> MIS XV AÑOS</p>
+    <div class="movie-actions">
+      <button type="button" id="movie-sound" aria-label="Silenciar video" aria-pressed="true">♫ <span>Silenciar</span></button>
+      <button type="button" id="movie-skip">Saltar video <span aria-hidden="true">↗</span></button>
+    </div>
+    <button type="button" id="movie-play" class="movie-retry" hidden>▶ Reproducir video</button>
+    <p id="movie-error" class="movie-error" role="status" hidden>No se pudo reproducir el video. Puedes saltarlo para ver la invitación.</p>
+    <div class="movie-progress" aria-hidden="true"><span id="movie-progress-bar"></span></div>
+  </div>
+
+  <!-- Nubes creadas con Python para unir el final del video y la invitación. -->
+  <div id="cloud-curtain" class="cloud-curtain" aria-hidden="true" hidden>
+    <div class="cloud-cloud cloud-left-1"></div>
+    <div class="cloud-cloud cloud-right-1"></div>
+    <div class="cloud-cloud cloud-left-2"></div>
+    <div class="cloud-cloud cloud-right-2"></div>
+    <div class="cloud-cloud cloud-top"></div>
+    <div class="cloud-cloud cloud-bottom"></div>
+    <div class="cloud-luminous-mist"></div>
+    <div class="cloud-white-veil"></div>
+  </div>
+
+  <audio id="emily-soundtrack" src="assets/audio/musica_emily.mp3" preload="auto" loop hidden></audio>
+
+  <main id="invitation" class="invitation" hidden>
+    <div class="paper-shell">
+      <header class="hero" id="inicio">
+        <div class="corner-art top-left" aria-hidden="true"></div>
+        <div class="corner-art top-right" aria-hidden="true"></div>
+        <img class="butterfly butterfly-hero butterfly-one" src="assets/butterfly.svg" alt="" aria-hidden="true">
+        <img class="butterfly butterfly-hero butterfly-two" src="assets/butterfly.svg" alt="" aria-hidden="true">
+        <img class="butterfly butterfly-hero butterfly-three" src="assets/butterfly.svg" alt="" aria-hidden="true">
+        <div class="gold-sparkles" aria-hidden="true"></div>
+        <img class="sun-emblem" src="assets/sun.svg" alt="" aria-hidden="true">
+        <p class="small-caps hero-topline">CELEBRANDO UN SUEÑO MUY ESPECIAL</p>
+        <h2 class="script hero-name">Emily</h2>
+        <p class="hero-xv">MIS QUINCE AÑOS</p>
+        <p class="hero-caption">12 DE DICIEMBRE · 2026</p>
+        <img class="ornament ornament-hero" src="assets/ornament.svg" alt="" aria-hidden="true">
+        <div class="music-player">
+          <span class="music-line"></span>
+          <button type="button" id="music-prev" class="music-small" aria-label="Reiniciar la canción" title="Reiniciar canción">↶</button>
+          <button type="button" id="music-toggle" class="music-main" aria-label="Reproducir música ambiental" aria-pressed="false"><span id="music-icon">▶</span></button>
+          <button type="button" id="music-next" class="music-small" aria-label="Avanzar 15 segundos de la canción" title="Avanzar 15 segundos">↻</button>
+          <span class="music-line"></span>
+          <span id="music-status" class="sr-only" role="status">Música ambiental pausada</span>
+        </div>
+        <p class="music-label">LA CANCIÓN DE ESTA NOCHE ESPECIAL</p>
+        <p class="music-hint" id="music-hint" hidden>Para escuchar la canción, toca el botón de reproducción.</p>
+        <div class="invitation-message">
+          <img class="ornament" src="assets/ornament.svg" alt="" aria-hidden="true">
+          <p>Hay momentos que marcan el comienzo de una nueva etapa, y sueños que se vuelven más hermosos cuando los compartimos con quienes más queremos.</p>
+          <p>Con mucha ilusión, te invito a celebrar conmigo mis quince años. Tu presencia hará que esta noche sea aún más especial.</p>
+          <img class="ornament ornament-small" src="assets/ornament.svg" alt="" aria-hidden="true">
+        </div>
+        <a class="scroll-cue" href="#fecha">Desliza para descubrir la invitación <span>⌄</span></a>
+      </header>
+
+      <section class="date-section decorative-section" id="fecha" aria-labelledby="fecha-title">
+        <div class="corner-art date-flower-left" aria-hidden="true"></div>
+        <div class="corner-art date-flower-right" aria-hidden="true"></div>
+        <p class="small-caps pretitle">GUARDA ESTA FECHA</p>
+        <h2 id="fecha-title" class="script section-script">El gran día</h2>
+        <div class="date-layout" aria-label="Sábado 12 de diciembre de 2026">
+          <div class="date-side"><span>SÁBADO</span><b>2026</b></div>
+          <div class="big-day">12</div>
+          <div class="date-side"><span>DICIEMBRE</span><b>7:30 P. M.</b></div>
+        </div>
+        <img class="ornament ornament-date" src="assets/ornament.svg" alt="" aria-hidden="true">
+        <div class="calendar" aria-label="Calendario de diciembre de 2026">
+          <h3>DICIEMBRE <span>2026</span></h3>
+          <div class="calendar-grid weekdays" aria-hidden="true"><span>D</span><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span></div>
+          <div id="calendar-days" class="calendar-grid days"></div>
+          <p class="calendar-note">Una fecha que guardaré en mi corazón</p>
+        </div>
+      </section>
+
+      <section class="countdown-section" aria-labelledby="countdown-title">
+        <p id="countdown-title" class="script countdown-heading">Faltan</p>
+        <div id="countdown" class="countdown" aria-label="Cuenta regresiva para los quince años de Emily">
+          <div><strong id="days">--</strong><span>DÍAS</span></div><em>:</em>
+          <div><strong id="hours">--</strong><span>HORAS</span></div><em>:</em>
+          <div><strong id="minutes">--</strong><span>MINUTOS</span></div><em>:</em>
+          <div><strong id="seconds">--</strong><span>SEGUNDOS</span></div>
+        </div>
+      </section>
+
+      <section class="details-section decorative-section" id="detalles" aria-labelledby="detalles-title">
+        <div class="corner-art details-flower-left" aria-hidden="true"></div>
+        <div class="corner-art details-flower-right" aria-hidden="true"></div>
+        <p class="small-caps pretitle">ESTÁS CORDIALMENTE INVITADO</p>
+        <h2 id="detalles-title" class="script section-script">Te espero</h2>
+        <p class="details-intro">Será una alegría compartir contigo la noche más especial de mis quince años.</p>
+        <div class="detail-cards">
+          <article class="event-card location-card">
+            <div class="card-emblem" aria-hidden="true">
+              <svg viewBox="0 0 32 38"><path d="M16 36C25 23 29 18 29 14a13 13 0 1 0-26 0c0 4 4 9 13 22Z" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="16" cy="14" r="5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+            </div>
+            <p class="card-kicker">LUGAR DE LA CELEBRACIÓN</p>
+            <h3>Hacienda<br>Meléndez</h3>
+            <p>12 de diciembre · 7:30 p. m.</p>
+            <a href="https://maps.app.goo.gl/pA8FTz4kBPpm9y8m6" target="_blank" rel="noopener noreferrer" class="card-button">VER UBICACIÓN <span aria-hidden="true">↗</span></a>
+          </article>
+          <article class="event-card dress-card">
+            <div class="card-emblem" aria-hidden="true">
+              <svg viewBox="0 0 40 48"><path d="M15 4c3 4 7 4 10 0l6 10-8 7 12 22H5l12-22-8-7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M16 21h8" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+            </div>
+            <p class="card-kicker">CÓDIGO DE VESTIMENTA</p>
+            <h3>Formal<br>&amp; Gala</h3>
+            <p>Viste elegante para celebrar juntos.</p>
+            <span class="dress-flourish" aria-hidden="true">✦ ✧ ✦</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="rsvp-section decorative-section" id="asistencia" aria-labelledby="rsvp-title">
+        <div class="corner-art rsvp-flower-left" aria-hidden="true"></div>
+        <img class="butterfly butterfly-rsvp" src="assets/butterfly.svg" alt="" aria-hidden="true">
+        <p class="small-caps pretitle">NOS ENCANTARÍA CONTAR CONTIGO</p>
+        <h2 id="rsvp-title" class="script section-script">Confirma tu asistencia</h2>
+        <p>Espero que seas parte de esta celebración. Cada persona que me acompaña hará de mis quince años un recuerdo inolvidable.</p>
+        <button id="open-rsvp" class="rsvp-button" type="button">CONFIRMAR ASISTENCIA <span aria-hidden="true">↗</span></button>
+        <p class="rsvp-hint">Tu confirmación ayudará a organizar esta noche especial.</p>
+      </section>
+
+      <footer class="invitation-footer">
+        <img class="ornament ornament-footer" src="assets/ornament.svg" alt="" aria-hidden="true">
+        <p class="script footer-name">Emily</p>
+        <p>MIS XV AÑOS</p>
+        <small>12 DE DICIEMBRE · 7:30 P. M.</small>
+        <button id="reopen" type="button" class="reopen-button">Volver a abrir el sobre</button>
+      </footer>
+    </div>
+  </main>
+
+  <dialog id="rsvp-dialog" class="rsvp-dialog" aria-labelledby="rsvp-dialog-title">
+    <form id="rsvp-form" class="rsvp-form" method="post" target="rsvp-transport" action="#">
+      <button type="button" class="dialog-close" id="close-rsvp" aria-label="Cerrar formulario">×</button>
+      <p class="small-caps">MIS XV AÑOS</p>
+      <h2 id="rsvp-dialog-title" class="script">Para Emily</h2>
+      <p>Confirma tu asistencia a esta noche especial.</p>
+
+      <fieldset class="attendance-fieldset">
+        <legend>¿Nos acompañarás?</legend>
+        <label><input type="radio" name="attending" value="Sí" checked> Sí, asistiré</label>
+        <label><input type="radio" name="attending" value="No"> No podré asistir</label>
+      </fieldset>
+
+      <div id="rsvp-attendance-options" class="rsvp-conditional">
+        <fieldset class="rsvp-type-fieldset">
+          <legend>Elige el tipo de confirmación</legend>
+          <label class="rsvp-type-choice">
+            <input type="radio" name="groupType" value="Individual" checked>
+            <span><strong>Individual</strong><small>Tú y, si deseas, un acompañante. Máximo 2 personas.</small></span>
+          </label>
+          <label class="rsvp-type-choice">
+            <input type="radio" name="groupType" value="Familiar">
+            <span><strong>Familiar</strong><small>Registra a tu familia. Máximo 6 personas en total.</small></span>
+          </label>
+        </fieldset>
+        <div class="rsvp-count-row">
+          <label for="guest-count">Número total de asistentes <small>(incluyéndote)</small></label>
+          <select id="guest-count" name="totalGuests" required>
+            <option value="1">1 persona</option>
+            <option value="2">2 personas</option>
+          </select>
+          <p class="form-hint" id="rsvp-count-hint">Individual: máximo 2 asistentes, incluyéndote.</p>
+        </div>
+      </div>
+
+      <section class="attendee-section" aria-labelledby="attendee-heading">
+        <div class="attendee-section-heading">
+          <h3 id="attendee-heading">Nombres de los invitados</h3>
+          <span id="attendee-counter">1 persona</span>
+        </div>
+        <p id="attendee-explanation" class="form-hint">Escribe nombres y apellidos de cada persona que asistirá.</p>
+        <div id="attendee-fields" class="attendee-fields">
+          <div class="attendee-card" data-person="1">
+            <h4>Persona 1 <span class="attendee-role">(quien confirma)</span></h4>
+            <div class="attendee-name-grid">
+              <div><label for="firstName1">Nombres</label><input type="text" id="firstName1" name="firstName1" placeholder="Nombres" autocomplete="given-name" minlength="2" maxlength="60" required></div>
+              <div><label for="lastName1">Apellidos</label><input type="text" id="lastName1" name="lastName1" placeholder="Apellidos" autocomplete="family-name" minlength="2" maxlength="60" required></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <label for="guest-message">Mensaje para Emily <span class="optional-label">(opcional)</span></label>
+      <textarea id="guest-message" name="message" maxlength="240" rows="3" placeholder="Unas palabras para Emily"></textarea>
+      <label class="privacy-consent"><input type="checkbox" id="guest-consent" name="consent" value="Sí" required> Entiendo que estos datos se usarán únicamente para organizar la celebración y que los revisará la persona organizadora.</label>
+      <input type="hidden" name="registrationId" id="registration-id">
+      <input type="hidden" name="source" value="Invitación web Emily">
+      <div class="anti-bot-field" aria-hidden="true"><label for="guest-website">Dejar vacío</label><input type="text" id="guest-website" name="website" tabindex="-1" autocomplete="off"></div>
+      <button type="submit" id="rsvp-submit" class="rsvp-submit">ENVIAR CONFIRMACIÓN</button>
+      <p class="form-hint">Tu respuesta se guardará en el registro privado de la celebración. Necesitas conexión a Internet para enviarla.</p>
+      <p id="rsvp-feedback" role="status" aria-live="polite"></p>
+    </form>
+  </dialog>
+  <iframe id="rsvp-transport" name="rsvp-transport" title="Envío de confirmación" hidden></iframe>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+EMILY · MIS XV AÑOS — VERSIÓN CONECTADA A GOOGLE SHEETS
+
+1. Abre index.html en tu navegador (con Internet).
+2. El formulario ya tiene configurada la URL de Apps Script. No necesitas pegarla de nuevo.
+3. Haz una prueba y comprueba la fila nueva en Google Sheets.
+4. Si necesitas detalles, abre CONEXION_GOOGLE_SHEETS.md.
+
+La invitación conserva animaciones, video, música y modal de confirmación.
+Individual: máximo 2 personas; familiar: máximo 6.
+No se enviaron respuestas ficticias a tu hoja durante la preparación.

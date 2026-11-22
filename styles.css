@@ -1,0 +1,305 @@
+:root{
+  --malva:#C29CA6;--malva-deep:#a67287;--rose:#d89fb0;--rose-pale:#f4dbe1;
+  --paper:#fffdfa;--warm:#fff8f8;--ink:#775760;--ink-strong:#6b4b57;
+  --gold:#b59a63;--gold-light:#dfc995;--line:rgba(181,154,99,.45);
+  --script:'Great Vibes','Apple Chancery','Z003','Segoe Script','Brush Script MT','URW Chancery L',cursive;
+  --serif:'Cormorant Garamond','EB Garamond','Georgia',serif;
+  --sans:'DM Sans','Arial',sans-serif;
+}
+*{box-sizing:border-box}
+body.intro-locked{overflow:hidden}
+html{scroll-behavior:smooth;scroll-padding-top:18px}
+body{margin:0;min-width:300px;background:linear-gradient(115deg,#b98e9d 0%,#dcb9c4 20%,#f3dfe6 50%,#c79da9 100%);color:var(--ink);font-family:var(--serif);-webkit-font-smoothing:antialiased}
+button,a,input,textarea{font:inherit}
+button{cursor:pointer}
+a{color:inherit}
+img{max-width:100%}
+[hidden]{display:none!important}
+.sr-only{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+.script{font-family:var(--script);font-weight:400;letter-spacing:0}
+.small-caps{font-family:var(--sans);font-size:10px;font-weight:600;letter-spacing:.28em;text-transform:uppercase}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #9b5772;outline-offset:4px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+/* Painted botanical and butterfly decorations */
+.corner-art{position:absolute;width:315px;height:330px;pointer-events:none;background:url('assets/floral-corner.svg') center/contain no-repeat;z-index:0;opacity:.95;filter:saturate(.98)}
+.butterfly{position:absolute;z-index:1;pointer-events:none;user-select:none;transform-origin:center;filter:drop-shadow(0 2px 4px rgba(160,105,125,.08))}
+/* Welcome, matching the sealed pink envelope opening in the reference */
+.intro{position:fixed;inset:0;z-index:100;display:grid;place-items:center;overflow:hidden;isolation:isolate;padding:12px;background:radial-gradient(ellipse at 50% 34%,#fff9f9 0%,#f3dbe1 33%,#dcb4c1 66%,#c49ca8 100%)}
+.intro::before{content:'';position:absolute;inset:13px;z-index:0;border:1px solid rgba(247,238,226,.85);box-shadow:inset 0 0 0 4px rgba(255,255,255,.12);pointer-events:none}
+.intro-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 57%,#fffdfa 0%,transparent 64%);opacity:.65;pointer-events:none}
+.intro-flower.tl{left:-110px;top:-105px;width:420px;height:400px;transform:rotate(-7deg)}
+.intro-flower.br{right:-145px;bottom:-110px;width:420px;height:400px;transform:rotate(177deg)}
+.butterfly-intro.one{left:max(5%,calc(50% - 340px));top:24%;width:95px;transform:rotate(-18deg);animation:fly-butterfly 7s ease-in-out infinite}
+.butterfly-intro.two{right:max(4%,calc(50% - 332px));bottom:24%;width:78px;transform:scaleX(-1) rotate(18deg);animation:fly-butterfly-2 8s ease-in-out infinite}
+.intro-content{position:relative;z-index:3;width:min(510px,96vw);display:flex;flex-direction:column;align-items:center;text-align:center;padding:30px 12px 36px}
+.intro-overline{color:#977381;letter-spacing:.34em;margin:0 0 4px}
+.intro-name{font-size:clamp(86px,17vw,146px);line-height:1;color:var(--malva-deep);margin:-2px 0 -13px;text-shadow:0 1px #fdf6ee80}
+.intro-subtitle{font:500 11px/1.4 var(--sans);letter-spacing:.5em;color:#8d6573;margin:5px 0 12px}
+.tiny-ornament{color:#b89b61;font-size:21px;opacity:.8;margin:4px 0 12px}
+.envelope-button{position:relative;width:min(420px,93vw);height:308px;border:0;background:transparent;cursor:pointer;padding:0;-webkit-tap-highlight-color:transparent;perspective:900px}
+.envelope-button:focus-visible{outline:2px solid #a67684;border-radius:14px}
+.envelope-art{position:absolute;inset:0;transform-origin:center;filter:drop-shadow(0 15px 16px rgba(137,80,94,.18));transition:transform 1s ease}
+.envelope-shadow{position:absolute;left:8%;right:8%;bottom:23px;height:24px;background:rgba(117,75,84,.2);filter:blur(16px);border-radius:50%}
+.envelope-body{position:absolute;inset:74px 8% 36px;border-radius:5px 5px 13px 13px;background:linear-gradient(150deg,#f9e8e9,#e4b7c2 72%,#cb94a5);box-shadow:0 3px 3px #ac7b8d17,inset 0 0 0 1px #cf9cac}
+.envelope-paper{position:absolute;z-index:2;left:18%;right:18%;top:81px;height:168px;border-radius:8px 8px 2px 2px;background:linear-gradient(#fffaf4,#fdf3f1);border:1px solid #d4aeae;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;transition:transform 1s cubic-bezier(.18,.85,.22,1);box-shadow:0 0 6px rgba(85,35,55,.08)}
+.paper-script{font-size:54px;color:var(--malva-deep);line-height:1.1}
+.paper-small{font:600 9px var(--sans);color:var(--gold);letter-spacing:.24em}
+.envelope-inner-flap{position:absolute;z-index:1;left:8%;right:8%;top:74px;height:107px;clip-path:polygon(0 0,50% 87%,100% 0);background:#d89ead;box-shadow:inset 0 2px 4px #fff8}
+.envelope-leftfold,.envelope-rightfold{position:absolute;z-index:3;bottom:36px;left:8%;width:84%;height:198px;background:linear-gradient(140deg,#f7d6dd,#e8b7c4 60%,#dcabb9);clip-path:polygon(0 0,50% 51%,0 100%);border-radius:4px}
+.envelope-rightfold{background:linear-gradient(230deg,#f6d5df,#e1b0bd 65%);clip-path:polygon(100% 0,50% 51%,100% 100%)}
+.envelope-bottomfold{position:absolute;z-index:4;bottom:36px;left:8%;width:84%;height:198px;background:linear-gradient(0deg,#e1afbc 0%,#f7d9df 90%);clip-path:polygon(0 100%,50% 37%,100% 100%);border-radius:0 0 9px 9px}
+.envelope-topflap{position:absolute;z-index:5;left:8%;right:8%;top:74px;height:130px;clip-path:polygon(0 0,50% 88%,100% 0);background:linear-gradient(180deg,#fbe9eb 0%,#ecc0cd 100%);transform-origin:top center;backface-visibility:hidden;transition:transform .85s cubic-bezier(.23,.8,.2,1),z-index .8s}
+.envelope-wax{position:absolute;z-index:7;left:50%;top:181px;transform:translateX(-50%);display:grid;place-items:center;width:59px;height:59px;border-radius:50%;background:radial-gradient(circle at 28% 25%,#e7c9ad 0%,#c79b77 40%,#b98275 69%,#9b6970 100%);border:5px solid #ddb394;box-shadow:0 6px 10px rgba(137,90,90,.24),inset 0 0 0 2px #fff5d67a;color:#fff9ec;font:italic 27px/1 var(--serif);transition:transform .6s,opacity .6s}
+.envelope-sprig{position:absolute;z-index:6;right:17%;top:167px;font-size:45px;color:#6f946e;transform:rotate(21deg);opacity:.6;pointer-events:none}
+.intro-instruction{font:500 12px/1.4 var(--sans);letter-spacing:.11em;color:#916878;margin:11px 0 26px;animation:soft-pulse 3s ease-in-out infinite}
+.intro-bottom{font-size:10px;color:#866470;letter-spacing:.22em;margin-top:5px}
+.intro-skip{position:absolute;z-index:7;right:23px;bottom:22px;border:0;background:#fff9f58c;color:#795666;border-radius:999px;padding:10px 14px;font:500 11px var(--sans);letter-spacing:.02em}
+.intro.is-opening .envelope-topflap{transform:rotateX(178deg);z-index:1}
+.intro.is-opening .envelope-wax{transform:translateX(-50%) scale(.65);opacity:0}
+.intro.is-opening .envelope-paper{transform:translateY(-100px)}
+.intro.is-opening .envelope-art{transform:translateY(15px) scale(1.07)}
+.intro.is-leaving{opacity:0;transform:scale(1.035);pointer-events:none;transition:opacity .65s ease,transform .65s ease}
+@keyframes fly-butterfly{50%{transform:translate(9px,-14px) rotate(-11deg)}}
+@keyframes fly-butterfly-2{50%{transform:translate(-10px,12px) scaleX(-1) rotate(12deg)}}
+@keyframes soft-pulse{50%{opacity:.58}}
+/* Invitation body: narrow, luxurious, floral scroll, like the sample */
+.invitation{position:relative;z-index:1;padding:0 clamp(10px,4vw,56px) 40px}
+.paper-shell{position:relative;width:min(100%,720px);margin:0 auto;background:var(--paper);box-shadow:0 25px 65px rgba(103,63,79,.27);overflow:hidden;isolation:isolate}
+.paper-shell::before{content:'';position:absolute;inset:12px;z-index:0;border:1px solid rgba(198,169,115,.24);pointer-events:none}
+.hero,.date-section,.details-section,.rsvp-section{position:relative;overflow:hidden;text-align:center}
+.hero{padding:30px 32px 59px;min-height:785px;display:flex;flex-direction:column;align-items:center;background:radial-gradient(ellipse at 50% 24%,#fffefa 0%,#fffdfb 57%,#fff5f8 100%)}
+.hero .top-left{top:-82px;left:-84px;width:325px;height:340px;transform:rotate(1deg)}
+.hero .top-right{top:-56px;right:-100px;width:280px;height:295px;transform:scaleX(-1) rotate(-6deg)}
+.butterfly-one{width:75px;top:16%;right:11%;transform:rotate(24deg);animation:float-wing 8s ease-in-out infinite}
+.butterfly-two{width:52px;left:8%;top:46%;transform:rotate(-29deg);animation:float-wing-2 7s ease-in-out infinite}
+.butterfly-three{width:38px;right:5%;top:70%;transform:rotate(12deg);opacity:.78;animation:float-wing 9s ease-in-out infinite 1s}
+@keyframes float-wing{50%{transform:translateY(-15px) translateX(-5px) rotate(17deg)}}
+@keyframes float-wing-2{50%{transform:translateY(12px) translateX(4px) rotate(-20deg)}}
+.gold-sparkles{position:absolute;inset:0;pointer-events:none;opacity:.38;background-image:radial-gradient(#c9a86a 1.1px,transparent 1.2px),radial-gradient(#dec18c 1px,transparent 1.1px);background-size:72px 89px,113px 103px;background-position:9px 20px,63px 66px;mask-image:linear-gradient(180deg,black,transparent 31%,transparent 75%,black)}
+.hero>*:not(.corner-art):not(.butterfly):not(.gold-sparkles){position:relative;z-index:2}
+.sun-emblem{width:86px;height:86px;margin:4px 0 20px;opacity:.94}
+.hero-topline{font-size:9px;letter-spacing:.34em;color:#bba778;margin-bottom:10px}
+.hero-name{font-size:clamp(90px,13vw,134px);line-height:.98;margin:1px 0 -7px;color:#b99b63;text-shadow:0 2px 0 #fffcf6,1px 1px 2px #d6c59e99}
+.hero-xv{font:500 12px/1.4 var(--sans);letter-spacing:.49em;color:#947d87;margin:0 0 10px}
+.hero-caption{font:500 9px/1.6 var(--sans);letter-spacing:.17em;color:#bc9ea9;margin:2px 0 10px}
+.ornament{display:block;width:min(270px,80%);height:auto;pointer-events:none}
+.ornament-hero{margin:7px auto 8px;max-height:48px}
+.music-player{display:flex;align-items:center;justify-content:center;gap:12px;width:min(260px,80%);margin:6px auto 0}
+.music-line{flex:1;height:2px;background:linear-gradient(90deg,transparent,#c5a575,transparent)}
+.music-small{border:0;background:transparent;color:#ba7e93;min-width:26px;min-height:30px;font:500 19px var(--serif)}
+.music-main{border:0;width:41px;height:41px;border-radius:50%;display:grid;place-items:center;background:#b77b91;color:white;box-shadow:0 7px 19px #c9a1b488;font-size:15px}
+.music-main:hover{background:#9c657b}
+.music-label{font:500 8px var(--sans);letter-spacing:.25em;color:#bba3aa;margin:10px auto 26px}
+.invitation-message{max-width:420px;margin:auto;text-align:center}
+.invitation-message .ornament{width:min(185px,60%);margin:0 auto 15px}
+.invitation-message p{font:500 clamp(18px,2.8vw,23px)/1.48 var(--serif);letter-spacing:.025em;color:#82666e;margin:14px auto 18px}
+.invitation-message .ornament-small{margin:4px auto 0;width:180px;transform:rotate(180deg)}
+.scroll-cue{font:500 10px/1.5 var(--sans);color:#a27787;letter-spacing:.06em;text-decoration:none;margin-top:24px}
+.scroll-cue span{display:block;font-size:24px;line-height:1.2;animation:soft-pulse 2s infinite}
+/* Date spread and calendar */
+.decorative-section{padding:55px 46px 58px;background:#fffdfa}
+.decorative-section>*:not(.corner-art):not(.butterfly){position:relative;z-index:2}
+.date-section{padding-top:53px;padding-bottom:68px}
+.date-flower-left{left:-99px;top:-83px;width:270px;height:295px;transform:rotate(-33deg);opacity:.72}
+.date-flower-right{right:-123px;bottom:-130px;width:350px;height:390px;transform:rotate(170deg);opacity:.63}
+.pretitle{font-size:10px;letter-spacing:.29em;color:#b58e9f;margin:0 0 13px}
+.section-script{font-size:clamp(61px,9vw,83px);color:#ae788a;line-height:1.08;margin:0 0 15px}
+.date-layout{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;justify-content:center;gap:23px;max-width:470px;margin:18px auto 10px}
+.date-side{display:flex;flex-direction:column;align-items:center;gap:11px;padding:10px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:#ad8191;font:600 11px var(--sans);letter-spacing:.11em}
+.date-side b{font:500 10px var(--sans);letter-spacing:.11em;color:#b99d63}
+.big-day{font:500 clamp(90px,15vw,126px)/1 var(--serif);color:#ac7687;letter-spacing:-.04em}
+.ornament-date{width:240px;margin:14px auto 12px}
+.calendar{max-width:380px;margin:28px auto 0;padding:5px 4px}
+.calendar h3{font:500 18px var(--serif);letter-spacing:.22em;color:#8c5b70;margin:0 0 20px}
+.calendar h3 span{color:#b49a66}
+.calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px}
+.weekdays{font:600 11px var(--sans);color:#a5848b;letter-spacing:.03em;margin-bottom:4px}
+.calendar-grid.days>span{height:37px;display:grid;place-items:center;border-radius:50%;font:500 15px var(--serif);color:#594751}
+.calendar-grid.days>span.empty{visibility:hidden}
+.calendar-grid.days>span.special-day{background:#c29ca6;color:#fff!important;border:2px solid #f5e6e6;box-shadow:0 0 0 1px #c29ca6,0 5px 12px #b58b9a42;font-weight:600}
+.calendar-note{margin:14px 0 0;color:#a77f90;font:italic 20px var(--serif)}
+/* Countdown band */
+.countdown-section{position:relative;z-index:2;text-align:center;padding:35px 25px 39px;background:linear-gradient(120deg,#cda1ae,#c092a2 54%,#b98da0);color:#fff7f4;box-shadow:inset 0 6px 20px #fff7,inset 0 -6px 30px #824c5620}
+.countdown-heading{font-size:62px;line-height:1;margin:0 0 13px;color:#fffaf1;text-shadow:0 2px 3px #a26d823d}
+.countdown{display:flex;align-items:baseline;justify-content:center;gap:8px}
+.countdown>div{display:flex;flex-direction:column;align-items:center;min-width:66px}
+.countdown strong{font:400 clamp(33px,6vw,49px)/1 var(--serif);font-variant-numeric:tabular-nums}
+.countdown span{font:500 9px var(--sans);letter-spacing:.1em;margin-top:10px}
+.countdown>em{font:400 26px var(--serif);opacity:.6;font-style:normal}
+/* Place and dress code details */
+.details-section{padding-top:70px;padding-bottom:77px}
+.details-flower-left{left:-130px;top:100px;width:290px;height:330px;transform:rotate(-33deg);opacity:.83}
+.details-flower-right{right:-140px;bottom:-100px;width:350px;height:370px;transform:scaleX(-1) rotate(-11deg);opacity:.8}
+.details-intro{max-width:390px;margin:4px auto 36px;color:#997984;font:400 21px/1.5 var(--serif)}
+.detail-cards{display:grid;gap:20px;max-width:380px;margin:auto}
+.event-card{position:relative;min-height:284px;padding:29px 18px 24px;border-radius:17px;background:linear-gradient(155deg,#e2b2c0 0%,#c58c9f 100%);box-shadow:0 12px 25px #ae7c8833;outline:1px solid #fff7ec70;outline-offset:-8px;color:#fff8f4;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.event-card:after{content:'✧';position:absolute;right:18px;top:12px;font-size:25px;color:#fff6df99}
+.card-emblem{height:44px;width:44px;margin:1px auto 12px;color:#fff6e9}
+.card-emblem svg{height:100%;width:100%}
+.card-kicker{font:600 9px var(--sans);letter-spacing:.18em;margin:0 0 7px;color:#fff9f1}
+.event-card h3{font:500 36px/1.06 var(--serif);letter-spacing:.015em;margin:0 0 9px;color:#fffefa}
+.event-card>p:not(.card-kicker){font:400 16px/1.4 var(--serif);margin:0 0 11px}
+.card-button{display:inline-flex;align-items:center;justify-content:center;gap:12px;margin:10px 0 0;border:1px solid #e5cfaa;min-height:39px;padding:8px 18px;border-radius:999px;background:linear-gradient(180deg,#f9e8bf,#dbc38d);color:#8c5f70;font:700 10px var(--sans);letter-spacing:.12em;text-decoration:none;box-shadow:0 6px 13px #7b4c5133;transition:transform .2s}
+.card-button:hover{transform:translateY(-3px)}
+.dress-card{min-height:256px;background:linear-gradient(135deg,#c99eae,#b88296)}
+.dress-flourish{font-size:18px;color:#f4dbad;letter-spacing:.35em;margin-top:6px}
+/* RSVP */
+.rsvp-section{padding-top:87px;padding-bottom:93px;background:radial-gradient(ellipse at 55% 15%,#fffbfa,#fff5f7 90%)}
+.rsvp-flower-left{left:-90px;top:-45px;width:290px;height:310px;transform:rotate(-22deg);opacity:.73}
+.butterfly-rsvp{width:100px;right:5%;top:12%;transform:rotate(31deg);opacity:.88;animation:float-wing 9s infinite}
+.rsvp-section>p:not(.pretitle){max-width:405px;margin:0 auto 25px;color:#8b6f78;font:400 20px/1.5 var(--serif)}
+.rsvp-button{min-height:52px;border:1px solid #ba8a9b;background:linear-gradient(135deg,#c99aaa,#b88195);border-radius:4px;color:#fffcf9;font:700 11px var(--sans);letter-spacing:.14em;padding:15px 25px;box-shadow:0 8px 15px #b48a963d}
+.rsvp-button:hover{background:#ae7688}
+.rsvp-button span{margin-left:10px;font-size:16px}
+.rsvp-section .rsvp-hint{font:400 13px var(--serif)!important;color:#aa8792!important;margin-top:12px!important}
+/* Ending */
+.invitation-footer{position:relative;padding:35px 12px 58px;text-align:center;background:#c29ca6;color:#fff8f2;border-top:4px solid #f5e9dd}
+.ornament-footer{margin:0 auto 6px;width:180px;filter:brightness(0) invert(1);opacity:.65}
+.footer-name{font-size:82px;line-height:1;margin:0}
+.invitation-footer p:not(.footer-name){font:600 11px var(--sans);letter-spacing:.35em;margin:0 0 10px}
+.invitation-footer small{display:block;font:500 10px var(--sans);letter-spacing:.16em;margin:8px 0 18px}
+.reopen-button{border:1px solid #fff8f29e;background:transparent;color:#fffefa;font:500 11px var(--sans);padding:10px 18px;border-radius:999px;letter-spacing:.04em}
+/* RSVP accessible dialog */
+.rsvp-dialog{border:1px solid #d7afbe;border-radius:23px;width:min(92vw,440px);max-height:85dvh;overflow:auto;padding:0;background:#fffaf9;color:var(--ink);box-shadow:0 22px 100px #53323d5c}
+.rsvp-dialog::backdrop{background:#3d2635a3;backdrop-filter:blur(5px)}
+.rsvp-form{position:relative;display:grid;gap:11px;padding:31px 28px 27px}
+.rsvp-form .small-caps{text-align:center;margin:0;color:#b69865}
+.rsvp-form h2{text-align:center;font-size:61px;margin:-12px 0 -8px;color:#a87689}
+.rsvp-form>p{margin:0 0 6px;text-align:center;font:400 19px/1.4 var(--serif)}
+.rsvp-form label,.rsvp-form legend{font:600 12px var(--sans);color:#735866}
+.rsvp-form input[type=text],.rsvp-form textarea{border:1px solid #ddbdc7;background:#fff;border-radius:9px;padding:12px 13px;color:#3e2933;width:100%;font:400 14px var(--sans);resize:vertical}
+.rsvp-form fieldset{border:1px solid #e7ccd5;border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:11px}
+.rsvp-form fieldset label{display:flex;align-items:center;gap:8px;font-weight:400}
+.rsvp-form input[type=radio]{accent-color:#a76f84;width:17px;height:17px}
+.dialog-close{position:absolute;right:15px;top:12px;background:transparent;border:0;font:400 30px var(--serif);color:#936c7b;width:30px;height:30px}
+.rsvp-submit{border:0;background:#b68095;color:white;padding:14px;border-radius:8px;font:700 11px var(--sans);letter-spacing:.14em;margin-top:6px}
+.rsvp-submit:hover{background:#9b677a}
+.rsvp-form .form-hint{font:400 12px/1.5 var(--sans);color:#997b84;margin:0}
+#rsvp-feedback{font:600 12px/1.45 var(--sans);color:#6a7f4d;min-height:15px}
+/* Phone fidelity: single long floral invitation; no horizontal overflow. */
+@media(max-width:700px){
+  .invitation{padding:0 0 16px}
+  .paper-shell{width:100%;box-shadow:none}
+  .paper-shell::before{inset:8px}
+  .hero{padding:23px 22px 49px;min-height:760px}
+  .hero .top-left{width:260px;height:280px;left:-97px;top:-60px}
+  .hero .top-right{width:236px;height:255px;right:-91px;top:-50px}
+  .butterfly-one{right:5%;top:19%;width:61px}
+  .butterfly-two{left:0;top:48%;width:42px}
+  .butterfly-three{right:1%;top:76%;width:35px}
+  .sun-emblem{width:78px;height:78px;margin:10px 0 21px}
+  .hero-topline{font-size:8px;letter-spacing:.20em;margin-bottom:18px}
+  .hero-name{font-size:clamp(91px,22vw,131px);margin:0 0 -6px}
+  .hero-xv{font-size:10px;letter-spacing:.43em}
+  .hero-caption{font-size:8px;letter-spacing:.14em}
+  .ornament-hero{width:225px;margin:12px auto}
+  .music-player{margin:8px auto 0}
+  .invitation-message{padding:0 20px}
+  .invitation-message p{font-size:21px;line-height:1.48;margin:16px auto}
+  .scroll-cue{font-size:9px;margin-top:17px}
+  .decorative-section{padding:54px 22px 60px}
+  .date-flower-left{left:-100px;top:-90px;width:250px}
+  .date-flower-right{right:-120px;bottom:-112px;width:285px}
+  .pretitle{font-size:9px;letter-spacing:.18em}
+  .section-script{font-size:69px}
+  .date-layout{gap:11px;max-width:360px}
+  .date-side{font-size:9px;letter-spacing:.06em}
+  .date-side b{font-size:9px}
+  .big-day{font-size:93px}
+  .calendar{max-width:335px}
+  .calendar-grid.days>span{height:35px}
+  .countdown-section{padding:31px 14px 36px}
+  .countdown-heading{font-size:58px}
+  .countdown{gap:4px}
+  .countdown>div{min-width:59px}
+  .countdown strong{font-size:37px}
+  .countdown span{font-size:8px;letter-spacing:.05em}
+  .countdown>em{font-size:21px}
+  .details-section{padding-top:66px;padding-bottom:78px}
+  .details-intro{font-size:20px;padding:0 12px;margin-bottom:29px}
+  .detail-cards{max-width:290px}
+  .event-card{min-height:256px}
+  .event-card h3{font-size:33px}
+  .rsvp-section{padding-top:86px;padding-bottom:79px}
+  .rsvp-flower-left{width:245px;height:280px;left:-117px;top:-70px}
+  .butterfly-rsvp{width:80px;right:-5%;top:17%}
+  .rsvp-section>p:not(.pretitle){font-size:19px}
+  .footer-name{font-size:73px}
+}
+@media(max-width:380px){
+ .intro-content{padding-inline:4px}
+ .intro-name{font-size:98px}
+ .envelope-button{height:277px;width:94vw;transform:scale(.95)}
+ .hero{padding-inline:13px;min-height:755px}
+ .hero-topline{font-size:7px}
+ .hero-name{font-size:98px}
+ .hero-xv{letter-spacing:.35em}
+ .invitation-message{padding-inline:14px}
+ .invitation-message p{font-size:19px}
+ .date-layout{gap:7px}
+ .big-day{font-size:84px}
+ .date-side span,.date-side b{font-size:8px}
+ .countdown>div{min-width:54px}
+ .countdown strong{font-size:32px}
+ .countdown span{font-size:7px}
+}
+/* Keep the watercolor butterflies beside the lettering, never across it. */
+@media(max-width:700px){
+  .butterfly-intro.one{left:-17px;top:36%;width:72px}
+  .butterfly-one{right:-6px;top:32%;width:45px}
+}
+
+/* RSVP conectado a Google Sheets: ajustes de campos y estados. */
+.rsvp-form input[type=number]{border:1px solid #ddbdc7;background:#fff;border-radius:9px;padding:12px 13px;color:#3e2933;width:100%;font:400 14px var(--sans)}
+.rsvp-form .privacy-consent{display:flex;align-items:flex-start;gap:10px;font:400 12px/1.55 var(--sans);color:#846a74}
+.rsvp-form .privacy-consent input{flex:0 0 auto;margin:3px 0 0;width:16px;height:16px;accent-color:#a76f84}
+.rsvp-form .optional-label{font-weight:400;color:#9c8390}
+.rsvp-form button:disabled{opacity:.55;cursor:wait}
+.rsvp-form #rsvp-feedback{min-height:22px;line-height:1.55}
+.rsvp-form #rsvp-feedback[data-state=error]{color:#ac3d53}
+.rsvp-form #rsvp-feedback[data-state=success]{color:#386946}
+.anti-bot-field{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;overflow:hidden!important;opacity:0!important}
+
+
+/* Emily XV · confirmaciones individuales y familiares. */
+.rsvp-dialog{width:min(94vw,540px);max-height:88dvh}
+.rsvp-form{gap:14px;padding:30px clamp(18px,5vw,30px) 27px}
+.rsvp-form .rsvp-conditional{display:grid;gap:13px}
+.rsvp-form .rsvp-conditional[hidden]{display:none!important}
+.rsvp-form .rsvp-type-fieldset{gap:9px;padding:13px}
+.rsvp-form .rsvp-type-fieldset legend{padding:0 5px}
+.rsvp-form .rsvp-type-fieldset .rsvp-type-choice{
+  display:flex;align-items:flex-start;gap:11px;padding:11px 12px;
+  border:1px solid #e5cbd4;border-radius:11px;background:#fff;cursor:pointer;
+  transition:border-color .15s,background .15s,box-shadow .15s;
+}
+.rsvp-form .rsvp-type-choice:has(input:checked){border-color:#b98295;background:#fff1f5;box-shadow:0 0 0 1px #c89dac55}
+.rsvp-form .rsvp-type-choice input{flex-shrink:0;margin-top:2px}
+.rsvp-form .rsvp-type-choice span{display:grid;gap:4px}
+.rsvp-form .rsvp-type-choice strong{font:700 13px var(--sans);color:#74505f}
+.rsvp-form .rsvp-type-choice small{font:400 12px/1.45 var(--sans);color:#8c707a}
+.rsvp-count-row{display:grid;gap:8px}
+.rsvp-count-row label small{font-weight:400;color:#987e88}
+.rsvp-form select{width:100%;min-height:44px;background:#fff;border:1px solid #ddbdc7;border-radius:9px;padding:10px 13px;color:#3e2933;font:500 14px var(--sans)}
+.rsvp-form select:focus-visible,.rsvp-form input:focus-visible,.rsvp-form textarea:focus-visible{outline:2px solid #ac7388;outline-offset:2px}
+.rsvp-count-row .form-hint{margin:0}
+.attendee-section{display:grid;gap:10px}
+.attendee-section-heading{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.attendee-section-heading h3{margin:0;font:700 14px var(--sans);color:#735866}
+.attendee-section-heading span{font:600 11px var(--sans);color:#a66d84;background:#f9eaf0;border-radius:999px;padding:5px 10px;white-space:nowrap}
+.attendee-section>.form-hint{margin:-3px 0 1px}
+.attendee-fields{display:grid;gap:10px}
+.attendee-card{display:grid;gap:10px;padding:13px;background:#fff;border:1px solid #ead4dc;border-radius:12px}
+.attendee-card[hidden]{display:none!important}
+.attendee-card h4{margin:0;font:700 12px var(--sans);color:#a16d80}
+.attendee-role{font-weight:400;color:#947e87}
+.attendee-name-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.attendee-name-grid>div{display:grid;gap:6px;min-width:0}
+.rsvp-form .attendee-name-grid label{font-size:11px}
+.rsvp-form .attendee-name-grid input{min-width:0}
+@media(max-width:420px){
+ .rsvp-dialog{max-height:90dvh}
+ .rsvp-form h2{font-size:54px}
+ .attendee-name-grid{grid-template-columns:1fr}
+ .rsvp-form .attendee-card{padding:12px}
+}

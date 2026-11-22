@@ -1,0 +1,102 @@
+/* Emily XV: video rosa cósmico y transición con nubes generadas en Python. */
+.movie-screen[hidden],.cloud-curtain[hidden],.movie-screen [hidden] {display:none!important}
+.movie-screen {
+  position:fixed;inset:0;z-index:180;overflow:hidden;isolation:isolate;
+  background:#171328;opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .82s ease,visibility .82s ease;
+}
+.movie-screen.is-showing{opacity:1;visibility:visible;pointer-events:auto}
+.movie-screen.is-hiding{opacity:0;visibility:hidden;pointer-events:none;transition:opacity .6s ease,visibility .6s ease}
+.movie-backdrop{position:absolute;inset:-12%;background:linear-gradient(180deg,#1e183a77,#9d5f8899),url('assets/video/portada_emily.jpg') center/cover;filter:blur(40px) saturate(.8);transform:scale(1.15)}
+.intro-video{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain;object-position:center;z-index:1;background:#070819d9}
+.movie-screen::after{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(180deg,#110b2588 0%,transparent 25%,transparent 68%,#100a208f 100%)}
+.movie-soft-frame{position:absolute;z-index:3;inset:clamp(15px,3vw,30px);border:1px solid #efcced3c;pointer-events:none}
+.movie-soft-frame i{position:absolute;width:31px;height:31px;border:1px solid #f3d3eaaa}
+.movie-soft-frame i:nth-child(1){left:-1px;top:-1px;border-right:0;border-bottom:0}
+.movie-soft-frame i:nth-child(2){right:-1px;top:-1px;border-left:0;border-bottom:0}
+.movie-soft-frame i:nth-child(3){left:-1px;bottom:-1px;border-right:0;border-top:0}
+.movie-soft-frame i:nth-child(4){right:-1px;bottom:-1px;border-left:0;border-top:0}
+.movie-label{position:absolute;z-index:4;left:50%;top:clamp(40px,7vh,88px);transform:translateX(-50%);margin:0;white-space:nowrap;text-align:center;font:600 clamp(9px,1vw,12px)/1.5 var(--sans);color:#fff3fc;letter-spacing:.3em;text-shadow:0 2px 15px #160c3199}
+.movie-label span{color:#eebad9;padding:0 .3em}
+.movie-actions{position:absolute;z-index:5;left:50%;bottom:clamp(42px,8vh,82px);transform:translateX(-50%);display:flex;justify-content:center;align-items:center;gap:12px;white-space:nowrap}
+.movie-actions button{min-height:44px;border:1px solid #f6d8ec85;color:#fdf2f9;background:#361c5077;border-radius:999px;padding:11px 20px;backdrop-filter:blur(12px);font:600 11px/1.5 var(--sans);letter-spacing:.07em;box-shadow:0 5px 19px #0d071b44;transition:background .25s ease,transform .25s ease}
+.movie-actions button:hover{background:#824e8eb9;transform:translateY(-2px)}
+#movie-skip{color:#39263f;background:#f8eaf4}
+#movie-skip:hover{background:white}
+.movie-retry{position:absolute;z-index:6;left:50%;top:53%;transform:translate(-50%,-50%);background:#f8e6f1;color:#4c2c4a;border:1px solid #ffedf5;border-radius:999px;padding:15px 23px;font:600 13px var(--sans);box-shadow:0 10px 38px #170b3366}
+.movie-error{position:absolute;z-index:6;bottom:22%;left:50%;transform:translateX(-50%);max-width:min(90vw,440px);padding:12px 20px;text-align:center;background:#170f29db;color:#fff4ff;border:1px solid #f4d6eb8a;font:13px/1.5 var(--sans);border-radius:12px}
+.movie-progress{position:absolute;z-index:4;left:clamp(39px,6vw,90px);right:clamp(39px,6vw,90px);bottom:clamp(28px,4.4vh,45px);height:2px;background:#f5d6ee69;border-radius:9px;overflow:hidden}
+.movie-progress span{height:100%;width:0;background:#f8dff8;display:block;box-shadow:0 0 14px #efb3ee}
+.music-hint{max-width:260px;text-align:center;color:#9b6d81;font:500 11px/1.5 var(--sans);margin:4px auto 10px}
+.cloud-curtain{position:fixed;inset:0;z-index:250;isolation:isolate;pointer-events:none;overflow:hidden;--cloud-duration:3800ms}
+.cloud-curtain.is-short{--cloud-duration:1600ms}
+.cloud-cloud{position:absolute;background-position:center;background-size:contain;background-repeat:no-repeat;opacity:0;will-change:transform,opacity;filter:blur(5px) saturate(.72) brightness(1.05)}
+.cloud-left-1{inset:-12% 24% 6% -42%;background-image:url('assets/clouds/nube_01.png')}
+.cloud-right-1{inset:-12% -42% 6% 24%;background-image:url('assets/clouds/nube_03.png')}
+.cloud-left-2{inset:20% 7% -34% -35%;background-image:url('assets/clouds/nube_04.png')}
+.cloud-right-2{inset:20% -35% -34% 7%;background-image:url('assets/clouds/nube_02.png')}
+.cloud-top{inset:-42% -12% 28% -12%;background-image:url('assets/clouds/nube_05.png')}
+.cloud-bottom{inset:28% -12% -42% -12%;background-image:url('assets/clouds/nube_06.png')}
+.cloud-luminous-mist{position:absolute;inset:-20%;opacity:0;will-change:opacity,transform;background:
+ radial-gradient(ellipse at 24% 47%,#f9effbe6 0%,#f9effbb8 22%,transparent 47%),
+ radial-gradient(ellipse at 76% 53%,#f6f0fadb 0%,#f6f0f9bf 22%,transparent 48%),
+ radial-gradient(ellipse at 50% 71%,#fff8fad1 0%,transparent 63%),
+ radial-gradient(ellipse at 50% 20%,#eadbeee8 0%,transparent 61%);filter:blur(20px)}
+.cloud-white-veil{position:absolute;inset:-6%;opacity:0;will-change:opacity;background:url('assets/clouds/neblina_completa.webp') center/cover;filter:blur(4px)}
+.cloud-curtain.is-active .cloud-left-1{animation:cl-left1 var(--cloud-duration) cubic-bezier(.3,.05,.24,1) both}
+.cloud-curtain.is-active .cloud-right-1{animation:cl-right1 var(--cloud-duration) cubic-bezier(.3,.05,.24,1) both}
+.cloud-curtain.is-active .cloud-left-2{animation:cl-left2 var(--cloud-duration) cubic-bezier(.3,.05,.24,1) both}
+.cloud-curtain.is-active .cloud-right-2{animation:cl-right2 var(--cloud-duration) cubic-bezier(.3,.05,.24,1) both}
+.cloud-curtain.is-active .cloud-top{animation:cl-top var(--cloud-duration) ease-in-out both}
+.cloud-curtain.is-active .cloud-bottom{animation:cl-bottom var(--cloud-duration) ease-in-out both}
+.cloud-curtain.is-active .cloud-luminous-mist{animation:cl-mist var(--cloud-duration) ease-in-out both}
+.cloud-curtain.is-active .cloud-white-veil{animation:cl-veil var(--cloud-duration) ease-in-out both}
+@keyframes cl-left1{0%{opacity:0;transform:translate3d(-42%,8%,0) scale(.8)}35%{opacity:.93;transform:translate3d(8%,0,0) scale(1.3)}52%{opacity:1;transform:translate3d(13%,-2%,0) scale(1.53)}100%{opacity:0;transform:translate3d(43%,-16%,0) scale(2.05)}}
+@keyframes cl-right1{0%{opacity:0;transform:translate3d(42%,7%,0) scale(.8)}35%{opacity:.94;transform:translate3d(-8%,0,0) scale(1.3)}52%{opacity:1;transform:translate3d(-13%,1%,0) scale(1.5)}100%{opacity:0;transform:translate3d(-43%,17%,0) scale(2.1)}}
+@keyframes cl-left2{0%{opacity:0;transform:translate3d(-22%,39%,0) scale(.82)}35%{opacity:.89;transform:translate3d(1%,-7%,0) scale(1.22)}52%{opacity:1;transform:translate3d(10%,-11%,0) scale(1.52)}100%{opacity:0;transform:translate3d(30%,-46%,0) scale(2)}}
+@keyframes cl-right2{0%{opacity:0;transform:translate3d(22%,39%,0) scale(.82)}35%{opacity:.9;transform:translate3d(-1%,-7%,0) scale(1.2)}52%{opacity:1;transform:translate3d(-10%,-13%,0) scale(1.52)}100%{opacity:0;transform:translate3d(-30%,-45%,0) scale(2)}}
+@keyframes cl-top{0%{opacity:0;transform:translate3d(0,-43%,0) scale(.9)}36%{opacity:.8;transform:translate3d(0,9%,0) scale(1.25)}54%{opacity:1;transform:translate3d(0,15%,0) scale(1.55)}100%{opacity:0;transform:translate3d(0,48%,0) scale(1.92)}}
+@keyframes cl-bottom{0%{opacity:0;transform:translate3d(0,46%,0) scale(.9)}36%{opacity:.82;transform:translate3d(0,-8%,0) scale(1.24)}54%{opacity:1;transform:translate3d(0,-14%,0) scale(1.5)}100%{opacity:0;transform:translate3d(0,-49%,0) scale(1.99)}}
+@keyframes cl-mist{0%,11%{opacity:0;transform:scale(.83)}38%{opacity:.71;transform:scale(1)}49%,59%{opacity:1;transform:scale(1.07)}100%{opacity:0;transform:scale(1.26)}}
+@keyframes cl-veil{0%,23%{opacity:0}41%{opacity:.94}47%,64%{opacity:1}76%{opacity:.72}100%{opacity:0}}
+@media(max-width:680px){
+ .movie-label{top:49px;font-size:9px;letter-spacing:.18em}
+ .intro-video{object-fit:contain}
+ .movie-actions{bottom:69px;gap:9px}
+ .movie-actions button{padding:11px 14px;font-size:10px;min-height:45px}
+ .movie-progress{bottom:42px;left:24px;right:24px}
+ .cloud-left-1{inset:-8% -2% 7% -68%}
+ .cloud-right-1{inset:-8% -68% 7% -2%}
+ .cloud-left-2{inset:14% -6% -40% -54%}
+ .cloud-right-2{inset:14% -54% -40% -6%}
+ .cloud-top{inset:-50% -33% 28% -33%}
+ .cloud-bottom{inset:30% -33% -50% -33%}
+}
+@media(prefers-reduced-motion:reduce){.movie-screen,.cloud-curtain.is-active>*{animation:none!important;transition:none!important}}
+/* Presentación vertical: el vídeo conserva su encuadre completo y el cielo
+   de fondo aparece desenfocado, sin bandas negras enormes en celulares. */
+.movie-backdrop{
+  background:linear-gradient(180deg,#160d2777,#5226486a),url('assets/video/portada_emily.jpg') center / cover;
+  filter:blur(35px) brightness(.74) saturate(1.2);
+}
+.intro-video{
+  inset:auto;
+  top:50%;left:50%;
+  width:min(100vw,150dvh);
+  height:auto;
+  max-height:86dvh;
+  aspect-ratio:848/478;
+  transform:translate(-50%,-50%);
+  object-fit:contain;
+  background:transparent;
+  box-shadow:0 15px 55px #0905184a;
+}
+@media(max-width:680px){
+ .intro-video{
+   width:100vw;
+   max-height:none;
+   border-block:1px solid #f2b1de58;
+   box-shadow:0 9px 40px #11082184;
+ }
+ .movie-backdrop {filter:blur(25px) brightness(.55) saturate(1.1)}
+}
